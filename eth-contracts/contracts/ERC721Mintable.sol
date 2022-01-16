@@ -11,14 +11,14 @@ contract Ownable {
     //  1) create a private '_owner' variable of type address with a public getter function
     address public _owner;
 
-    function getOwner() public {
+    function getOwner() public view returns (address){
         return _owner;
     }
     //  2) create an internal constructor that sets the _owner var to the creater of the contract
     constructor() public
     {
         _owner = msg.sender;
-        emit ownerShipTransferred(newOwner);
+        emit ownerShipTransferred(_owner);
     }
     //  3) create an 'onlyOwner' modifier that throws if called by any account other than the owner.
     modifier onlyOwner()
@@ -41,36 +41,40 @@ contract Ownable {
 //  TODO's: Create a Pausable contract that inherits from the Ownable contract
 contract Pausable is Ownable {
     //  1) create a private '_paused' variable of type bool
-    boolean private _paused;
-    //  2) create a public setter using the inherited onlyOwner modifier
-    function setStatus(boolean status) onlyOwner {
-        _paused = status;
+    bool private _paused;
 
-        if (status == true) {
-            emit paused(true);
-        } else if (status == false) {
-            emit unpaused(true);
+    //  2) create a public setter using the inherited onlyOwner modifier
+    function setPaused(bool paused) public onlyOwner {
+        _paused = paused;
+
+        if (_paused == true) {
+            emit Paused(msg.sender);
+        } else if (_paused == false) {
+            emit Unpaused(msg.sender);
         }
     }
     //  3) create an internal constructor that sets the _paused variable to false
-    constructor() private
+    constructor() internal
     {
         _paused = false;
+        emit Unpaused(msg.sender);
     }
     //  4) create 'whenNotPaused' & 'paused' modifier that throws in the appropriate situation
     modifier whenNotPaused()
     {
-        require(_paused, false);
+        require(_paused == true, "Contract currently paused");
+        _;
     }
 
     modifier paused()
     {
-        require(_paused, true);
+        require(_paused == false, "Contract currently not paused");
+        _;
     }
 
     //  5) create a Paused & Unpaused event that emits the address that triggered the event
-    event paused(boolean status);
-    event unpaused(boolean status);
+    event Paused(address trigger);
+    event Unpaused(address trigger);
 }
 
 contract ERC165 {
@@ -161,13 +165,13 @@ contract ERC721 is Pausable, ERC165 {
     // @dev Approves another address to transfer the given token ID
     function approve(address to, uint256 tokenId) public {
         // TODO require the given address to not be the owner of the tokenId
-        require(to != ownerOf, "the given address to not be the owner of the tokenId");
+        require(to != ownerOf(tokenId), "the given address to not be the owner of the tokenId");
         // TODO require the msg sender to be the owner of the contract or isApprovedForAll() to be true
-        require(isApprovedForAll() == true, "Approved all is false");
+        require((ownerOf(tokenId) == msg.sender) || (isApprovedForAll(ownerOf(tokenId), msg.sender)), "Not the owner of the token.");
         // TODO add 'to' address to token approvals
         _tokenApprovals[tokenId] = to;
         // TODO emit Approval Event
-        emit Approval(ownerOf, to, tokenId);
+        emit Approval(ownerOf(tokenId), to, tokenId);
     }
 
     function getApproved(uint256 tokenId) public view returns (address) {
@@ -245,7 +249,7 @@ contract ERC721 is Pausable, ERC165 {
         }
         // TODO mint tokenId to given address & increase token count of owner
         _tokenOwner[tokenId] = to;
-        _ownedTokensCount(to).increment();
+        _ownedTokensCount[to].increment();
 
         // TODO emit Transfer event
         emit Transfer(msg.sender, to, tokenId);
@@ -258,14 +262,14 @@ contract ERC721 is Pausable, ERC165 {
         require(ownerOf(tokenId) == from, "the address is not the owner of the given token");
 
         // TODO: require token is being transfered to valid address
-        require(!to.IsContract(), "destination is not a valid address");
+        require(!to.isContract(), "the destination is not a valid address");
         
         // TODO: clear approval
         _tokenApprovals[tokenId] = address(0);
 
         // TODO: update token counts & transfer ownership of the token ID 
-        _ownedTokensCount(from).increment();
-        _ownedTokensCount(to).decrement();
+        _ownedTokensCount[from].increment();
+        _ownedTokensCount[to].decrement();
         _tokenOwner[tokenId] = to;
 
         // TODO: emit correct event
@@ -495,7 +499,7 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
         // TODO: set instance var values
         _name = name;
         _symbol = symbol;
-        _baseTokenURI = _baseTokenURI;
+        _baseTokenURI = baseTokenURI;
 
         _registerInterface(_INTERFACE_ID_ERC721_METADATA);
     }
@@ -512,12 +516,6 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
     function getBaseTokenURI() external view returns(string memory) {
         return _baseTokenURI;
     }
-
-    function tokenURI(uint256 tokenId) {
-        require(_exists(tokenId));
-        return _tokenURIs[tokenId];
-    }
-
 
     function tokenURI(uint256 tokenId) external view returns (string memory) {
         require(_exists(tokenId));
@@ -539,7 +537,7 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
 //  TODO's: Create CustomERC721Token contract that inherits from the ERC721Metadata contract. You can name this contract as you please
 //  1) Pass in appropriate values for the inherited ERC721Metadata contract
 //      - make the base token uri: https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/
-contract Realestatetoken is ERC721Metadata("Realestoken", "RST", "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/") {
+contract RealEstateToken is ERC721Metadata("Realestoken", "RST", "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/") {
     //  2) create a public mint() that does the following:
     //      -can only be executed by the contract owner
     //      -takes in a 'to' address, tokenId, and tokenURI as parameters

@@ -1,4 +1,5 @@
-var ERC721MintableComplete = artifacts.require('ERC721MintableComplete');
+// var ERC721MintableComplete = artifacts.require('ERC721MintableComplete');
+var RealEstateToken = artifacts.require('RealestokenERC721Token');
 
 contract('TestERC721Mintable', accounts => {
 
@@ -7,9 +8,13 @@ contract('TestERC721Mintable', accounts => {
 
     describe('match erc721 spec', function () {
         beforeEach(async function () { 
-            this.contract = await ERC721MintableComplete.new({from: account_one});
+            this.contract = await RealEstateToken.new({from: account_one});
 
-            // TODO: mint multiple tokens
+            let i = 0;
+            while (i < 5) {
+                this.contract.mint(account_one, i);
+                i += 1;
+            }
         })
 
         it('should return total supply', async function () { 
