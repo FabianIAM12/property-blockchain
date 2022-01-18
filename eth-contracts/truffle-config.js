@@ -24,13 +24,13 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 var HDWalletProvider = require("truffle-hdwallet-provider");
-const mnemonic = 'arrow weird unveil someone silent volume shoe athlete pride forum flat sustain'
+const mnemonic = 'target funny retire aerobic live enjoy sure sheriff left indoor wing scene'
 
 module.exports = {
     networks: {
         development: {
             provider: function() {
-                return new HDWalletProvider(mnemonic, "http://127.0.0.1:7545/", 0, 50);
+                return new HDWalletProvider(mnemonic, "http://127.0.0.1:1234/", 0, 50);
             },
             network_id: '*',
             gasPrice: 10000000,
