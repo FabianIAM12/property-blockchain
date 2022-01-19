@@ -23,18 +23,17 @@
 //
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
-var HDWalletProvider = require("truffle-hdwallet-provider");
 const mnemonic = 'target funny retire aerobic live enjoy sure sheriff left indoor wing scene'
 
 module.exports = {
     networks: {
         development: {
-            provider: function() {
-                return new HDWalletProvider(mnemonic, "http://127.0.0.1:1234/", 0, 50);
-            },
+            host: "127.0.0.1",
+            port: 1234,
             network_id: '*',
-            gasPrice: 10000000,
-            gasLimit: 5000000000000
+            gas: 4600000,
+            // gasPrice: 10000000,
+            // gasLimit: 5000000000000
         }
     },
     compilers: {
