@@ -23,7 +23,8 @@ contract('SquareVerifier', accounts => {
             let k = ["0x2778b059f34bb39b09845524e33389a2439a884cf98db7c40ed7d5482791aa00", "0x2880c29be34d74cc467d5252248184240f7a2dcee75775d2f488db062c753bb9"];
             let inputs = [9,1];
 
-            let verification = await contractSolnVerifier.verifyTx(a, a_p, b, b_p, c, c_p, h, k, inputs);
+            let verification = await contractSolnVerifier.verifyTx.call(a, a_p, b, b_p, c, c_p, h, k, inputs);
+
             assert.equal(verification, true, "Should be valid.");
         })
     });
