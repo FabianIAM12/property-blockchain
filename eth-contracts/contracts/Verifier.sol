@@ -1,3 +1,4 @@
+pragma experimental ABIEncoderV2;
 // This file is MIT Licensed.
 //
 // Copyright 2017 Christian Reitwiessner
@@ -176,7 +177,7 @@ contract Verifier {
         vk.IC[1] = Pairing.G1Point(0x118e4e7722fbc18864699ab0e4e83433d300006ecdfedab6e6ee04659d967eb7, 0xf31a3f2b88aa9c3ab56cf3acb3ebf2df9885438c83038d0e7d5b33624007fd5);
         vk.IC[2] = Pairing.G1Point(0x2bbb9696eaa760f4b5a70c2f9b7f65ba3a38b6bcde286268640162dc1ff2d857, 0x252972de63b33ad24e56208c602868beefee168b78f7f0acef8176aa09df2ff7);
     }
-    function verify(uint[] memory input, Proof memory proof) internal returns (uint) {
+    function verify(uint[] memory input, Proof memory proof) public payable returns (uint) {
         VerifyingKey memory vk = verifyingKey();
         require(input.length + 1 == vk.IC.length);
         // Compute the linear combination vk_x
@@ -210,7 +211,7 @@ contract Verifier {
         uint[2] memory h,
         uint[2] memory k,
         uint[2] memory input
-    ) public returns (bool r) {
+    ) public payable returns (bool r) {
         Proof memory proof;
         proof.A = Pairing.G1Point(a[0], a[1]);
         proof.A_p = Pairing.G1Point(a_p[0], a_p[1]);
