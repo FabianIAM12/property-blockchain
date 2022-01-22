@@ -5,7 +5,7 @@ contract('SquareVerifier', accounts => {
     let verifier;
     const account_one = accounts[0];
 
-    describe('Verification', function () {
+    describe('Verification Square', function () {
         beforeEach(async function () {
             verifier = await SquareVerifier.new({from: account_one});
         })

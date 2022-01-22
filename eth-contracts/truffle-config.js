@@ -18,12 +18,14 @@
  *
  */
 
-// const HDWalletProvider = require('truffle-hdwallet-provider');
+const HDWalletProvider = require('truffle-hdwallet-provider');
+const fs = require("fs");
 // const infuraKey = "fj4jll3k.....";
 //
 // const fs = require('fs');
-// const mnemonic = fs.readFileSync(".secret").toString().trim();
-const mnemonic = 'grid coffee special will elevator razor wrestle rail machine salmon balance smart'
+const mnemonic = fs.readFileSync("private-key.secret").toString().trim();
+const token = fs.readFileSync("token.secret").toString().trim();
+// const mnemonic = 'grid coffee special will elevator razor wrestle rail machine salmon balance smart'
 
 module.exports = {
     networks: {
@@ -34,6 +36,12 @@ module.exports = {
             // gas: 3000000,
             // gasPrice: 10000000,
             // gasLimit: 50000000000000000
+        },
+        rinkeby: {
+            // networkCheckTimeout: 10000, in case its needed
+            provider: () => new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/` + token),
+            network_id: 4,
+            gasPrice: 2000000000
         }
     },
     compilers: {

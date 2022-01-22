@@ -2,12 +2,12 @@
 var SolnSquareVerifier = artifacts.require('SolnSquareVerifier');
 var RealEstateToken = artifacts.require('RealEstateToken');
 
-contract('SquareVerifier', accounts => {
+contract('SolnSquareVerifier', accounts => {
     let contractSolnVerifier;
     let contractRealEstate;
     const account_one = accounts[0];
 
-    describe('Verification', function () {
+    describe('Verification Soln', function () {
         beforeEach(async function () {
             contractSolnVerifier = await SolnSquareVerifier.new({from: account_one});
             contractRealEstate = await RealEstateToken.new({from: account_one});
