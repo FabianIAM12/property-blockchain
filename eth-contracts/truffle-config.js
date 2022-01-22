@@ -23,17 +23,17 @@
 //
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
-const mnemonic = 'target funny retire aerobic live enjoy sure sheriff left indoor wing scene'
+const mnemonic = 'grid coffee special will elevator razor wrestle rail machine salmon balance smart'
 
 module.exports = {
     networks: {
         development: {
             host: "127.0.0.1",
-            port: 1234,
+            port: 7545,
             network_id: '*',
-            gas: 4600000,
+            // gas: 3000000,
             // gasPrice: 10000000,
-            // gasLimit: 5000000000000
+            // gasLimit: 50000000000000000
         }
     },
     compilers: {

@@ -2,12 +2,12 @@
 var SquareVerifier = artifacts.require('Verifier');
 
 contract('SquareVerifier', accounts => {
-    let contractSolnVerifier;
+    let verifier;
     const account_one = accounts[0];
 
     describe('Verification', function () {
         beforeEach(async function () {
-            contractSolnVerifier = await SquareVerifier.new({from: account_one});
+            verifier = await SquareVerifier.new({from: account_one});
         })
 
         it('should verify those values', async function () {
@@ -23,7 +23,7 @@ contract('SquareVerifier', accounts => {
             let k = ["0x2778b059f34bb39b09845524e33389a2439a884cf98db7c40ed7d5482791aa00", "0x2880c29be34d74cc467d5252248184240f7a2dcee75775d2f488db062c753bb9"];
             let inputs = [9,1];
 
-            let verification = await contractSolnVerifier.verifyTx.call(a, a_p, b, b_p, c, c_p, h, k, inputs);
+            let verification = await verifier.verifyTx.call(a, a_p, b, b_p, c, c_p, h, k, inputs);
 
             assert.equal(verification, true, "Should be valid.");
         })
