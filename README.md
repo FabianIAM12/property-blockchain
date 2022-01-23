@@ -64,12 +64,9 @@ https://testnets.opensea.io/collection/landxtoken
 0x3e70225A69CeF423086b327db6ECf5Ee44371190
 ```
 
-## Sell transactions
-* https://rinkeby.etherscan.io/tx/0x6f4f3767b3a9be29e82d5e4016adb4b1790e18f0038f56c7459d36b91ad61598
-* 
-*  
-* 
-* 
+## Sold items
+* Transaction: https://rinkeby.etherscan.io/tx/0x6f4f3767b3a9be29e82d5e4016adb4b1790e18f0038f56c7459d36b91ad61598
+* Item: https://testnets.opensea.io/assets/0x2a67e3cebfb283b097b343d753d1547ae9b68836/90
 
 ## Interaction with the contract
 To deal with contracts 
