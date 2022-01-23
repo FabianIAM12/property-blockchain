@@ -26,19 +26,19 @@ truffle migrate --network rinkeby --reset
 
 ### Migrations
 ```
-Address: 0xe3B782a8bc5A44ea9B0A9f8D9478d8F9A2031499
-Hash: 0x8dc34e437ed3f9ad77a62d0dbc0f2f5fdb34150754603634a5d0ba5ade3da60a 
+Address: 0x7b83b2ba28025A3c008C2DEd2c9d0989158E1390
+Hash: 0x2267c74e5a73a316ecd65cb991e9535e98ac7c5dfb235c153bd25a85867c01c6 
 ```
 ### Verifier
 ```
-Address: 0x765c1430A6B420766091A54b4B5f70531ffC31d0
-Hash: 0x27dca503445730304f1e76c3b6f9d148ba78f99368c90c6d466e6b4420e63a81
+Address: 0x0B53C021F9D2d1cc23CE1eC006B7870097fcb3B3
+Hash: 0x497abae5a87581ecd76f8fb6d9e2d8bda9a26fc0433782e601c1edeefa106581
 ```
 
 ### SolnSquareVerifier
 ```
-Address: 0x82573Ea2e76873B0a3Ca513289ea28c26dA7098b
-Hash: 0xa85cf9efa60d009a202bb75712ca241a66d8a5db1a85ea13edb9f4bcbb5aed17
+Address: 0x2a67E3CEBFB283b097B343d753D1547aE9b68836
+Hash: 0x934eb88ccda3526907dc433843a6945a507328f3320e3c7ae4c66152bd069d54
 ```
 
 ## Token & address locations
@@ -50,20 +50,27 @@ https://rinkeby.etherscan.io/token/0xc05820026bf560d8f17e24b56539c8bb1f020cad
 https://testnets.opensea.io/collection/landxtoken
 
 ## Housing listings
-* https://testnets.opensea.io/assets/0x2a67e3cebfb283b097b343d753d1547ae9b68836/90
-* https://testnets.opensea.io/assets/0x2a67e3cebfb283b097b343d753d1547ae9b68836/89
+* https://testnets.opensea.io/assets/0x2a67e3cebfb283b097b343d753d1547ae9b68836/110
+* https://testnets.opensea.io/assets/0x2a67e3cebfb283b097b343d753d1547ae9b68836/109
+* https://testnets.opensea.io/assets/0x2a67e3cebfb283b097b343d753d1547ae9b68836/108
+* https://testnets.opensea.io/assets/0x2a67e3cebfb283b097b343d753d1547ae9b68836/107
+* https://testnets.opensea.io/assets/0x2a67e3cebfb283b097b343d753d1547ae9b68836/106
 
-## Sold ones
-* https://rinkeby.etherscan.io/tx/0x6f4f3767b3a9be29e82d5e4016adb4b1790e18f0038f56c7459d36b91ad61598
-*
-*
-*
-*
+### Bundle on sale
+* https://testnets.opensea.io/bundles/the-nft-housing-lifetime-bundle-HOW
 
-## Location of the "Buying" Account
+## Address of the "Buying" Account
 ```
 0x3e70225A69CeF423086b327db6ECf5Ee44371190
 ```
+
+## Sell transactions
+* https://rinkeby.etherscan.io/tx/0x6f4f3767b3a9be29e82d5e4016adb4b1790e18f0038f56c7459d36b91ad61598
+* 
+*  
+* 
+* 
+
 ## Interaction with the contract
 To deal with contracts 
 ```
