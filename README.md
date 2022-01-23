@@ -1,8 +1,8 @@
-# Udacity Blockchain Capstone
+# Blockchain Housing Capstone
 
-Project about a decentralized housing product. 
+Project about a decentralized blockchain housing platform. It uses Solidity, JavaScript & the Etheureum Blockchain as a backend.
 
-# How to run the tests
+## How to run the tests
 Switch to the eth-contracts folder
 ```
 cd etc-contract folder
@@ -18,47 +18,35 @@ For testing a single file:
 truffle test [file]
 ```
 
-# Contract addresses - where are they deployed?
-Deploy via
+## Contract addresses
+To do a basic deployment:
 ```
 truffle migrate --network rinkeby --reset
 ```
 
-## Migrations
+### Migrations
 ```
-0x777a01E91D8C942D04EE580068704f3c8135f850
+Address: 0x777a01E91D8C942D04EE580068704f3c8135f850
+Hash: 0xa20a0601266e8fa36fd447293a3a4b285e71f21bd04c5a85ac7208c35f5c2c61 
 ```
-
-### Transaction hash
+### Verifier
 ```
-0xa20a0601266e8fa36fd447293a3a4b285e71f21bd04c5a85ac7208c35f5c2c61 
-```
-## Verifier
-```
-0x561C639E5f0a8E881Ab65C59681eaa47632cf65c
+Address: 0x561C639E5f0a8E881Ab65C59681eaa47632cf65c
+Hash: 0xa20a0601266e8fa36fd447293a3a4b285e71f21bd04c5a85ac7208c35f5c2c61
 ```
 
-### Transaction hash
-``` 
-0xa20a0601266e8fa36fd447293a3a4b285e71f21bd04c5a85ac7208c35f5c2c61
+### SolnSquareVerifier
+```
+Address: 0xc05820026bf560D8F17E24b56539c8Bb1F020CAD
+Hash: 0xa20a0601266e8fa36fd447293a3a4b285e71f21bd04c5a85ac7208c35f5c2c61
 ```
 
-## SolnSquareVerifier
-```
-0xc05820026bf560D8F17E24b56539c8Bb1F020CAD
-```
-
-### Transaction hash
-``` 
-0xa20a0601266e8fa36fd447293a3a4b285e71f21bd04c5a85ac7208c35f5c2c61
-```
-
-# Token tracker - where are the tokens?
+## Token & address locations
 ```
 https://rinkeby.etherscan.io/token/0xc05820026bf560d8f17e24b56539c8bb1f020cad
 ```
 
-# OpenSea Marktplace storefront link
+## OpenSea Marktplace storefront link
 https://testnets.opensea.io/collection/landxtoken
 
 ## Housing listings
@@ -69,19 +57,18 @@ https://testnets.opensea.io/collection/landxtoken
 * https://testnets.opensea.io/assets/0xc05820026bf560d8f17e24b56539c8bb1f020cad/6
 * https://testnets.opensea.io/assets/0xc05820026bf560d8f17e24b56539c8bb1f020cad/5
 
-# Buying Account
+## Location of the "Buying" Account
 ```
 0x3e70225A69CeF423086b327db6ECf5Ee44371190
 ```
-
-# Interaction
+## Interaction with the contract
 To deal with contracts 
 ```
 myetherwallet.com
 ```
 is a suitable tool. Contract abi is also needed (below).
 
-# Contracts Full ABI
+## Contracts Full ABI
 
 ```
 [
