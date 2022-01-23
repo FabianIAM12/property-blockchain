@@ -50,12 +50,15 @@ https://rinkeby.etherscan.io/token/0xc05820026bf560d8f17e24b56539c8bb1f020cad
 https://testnets.opensea.io/collection/landxtoken
 
 ## Housing listings
-* https://testnets.opensea.io/assets/0xc05820026bf560d8f17e24b56539c8bb1f020cad/10
-* https://testnets.opensea.io/assets/0xc05820026bf560d8f17e24b56539c8bb1f020cad/9
-* https://testnets.opensea.io/assets/0xc05820026bf560d8f17e24b56539c8bb1f020cad/8
-* https://testnets.opensea.io/assets/0xc05820026bf560d8f17e24b56539c8bb1f020cad/7
-* https://testnets.opensea.io/assets/0xc05820026bf560d8f17e24b56539c8bb1f020cad/6
-* https://testnets.opensea.io/assets/0xc05820026bf560d8f17e24b56539c8bb1f020cad/5
+* https://testnets.opensea.io/assets/0x2a67e3cebfb283b097b343d753d1547ae9b68836/90
+* https://testnets.opensea.io/assets/0x2a67e3cebfb283b097b343d753d1547ae9b68836/89
+
+## Sold ones
+* https://rinkeby.etherscan.io/tx/0x6f4f3767b3a9be29e82d5e4016adb4b1790e18f0038f56c7459d36b91ad61598
+*
+*
+*
+*
 
 ## Location of the "Buying" Account
 ```
