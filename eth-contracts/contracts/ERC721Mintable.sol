@@ -16,7 +16,7 @@ contract Ownable {
         return _owner;
     }
     //  2) create an internal constructor that sets the _owner var to the creater of the contract
-    constructor() public
+    constructor() internal
     {
         _owner = msg.sender;
         emit ownerShipTransferred(_owner);
@@ -43,15 +43,15 @@ contract Ownable {
 //  TODO's: Create a Pausable contract that inherits from the Ownable contract
 contract Pausable is Ownable {
     //  1) create a private '_paused' variable of type bool
-    bool private _paused;
+    bool private _paused = false;
 
     //  2) create a public setter using the inherited onlyOwner modifier
     function setPaused(bool paused) public onlyOwner {
         _paused = paused;
 
-        if (_paused == true) {
+        if (_paused) {
             emit Paused(msg.sender);
-        } else if (_paused == false) {
+        } else {
             emit Unpaused(msg.sender);
         }
     }
@@ -79,7 +79,7 @@ contract Pausable is Ownable {
     event Unpaused(address trigger);
 }
 
-contract ERC165 {
+contract ERC165 is Ownable {
     bytes4 private constant _INTERFACE_ID_ERC165 = 0x01ffc9a7;
     /*
      * 0x01ffc9a7 ===
@@ -122,7 +122,7 @@ contract ERC721 is Pausable, ERC165 {
     event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
 
     event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
-    
+
     using SafeMath for uint256;
     using Address for address;
     using Counters for Counters.Counter;
@@ -263,13 +263,13 @@ contract ERC721 is Pausable, ERC165 {
 
         // TODO: require token is being transfered to valid address
         require(!to.isContract(), "the destination is not a valid address");
-        
+
         // TODO: clear approval
         _tokenApprovals[tokenId] = address(0);
 
-        // TODO: update token counts & transfer ownership of the token ID 
-        _ownedTokensCount[from].increment();
-        _ownedTokensCount[to].decrement();
+        // TODO: update token counts & transfer ownership of the token ID
+        _ownedTokensCount[from].decrement();
+        _ownedTokensCount[to].increment();
         _tokenOwner[tokenId] = to;
 
         // TODO: emit correct event
@@ -286,7 +286,7 @@ contract ERC721 is Pausable, ERC165 {
      * @return bool whether the call correctly returned the expected magic value
      */
     function _checkOnERC721Received(address from, address to, uint256 tokenId, bytes memory _data)
-        internal returns (bool)
+    internal returns (bool)
     {
         if (!to.isContract()) {
             return true;
@@ -476,7 +476,7 @@ contract ERC721Enumerable is ERC165, ERC721 {
 }
 
 contract ERC721Metadata is ERC721Enumerable, usingOraclize {
-    
+
     // TODO: Create private vars for token _name, _symbol, and _baseTokenURI (string)
     string private _name;
     string private _symbol;
@@ -525,10 +525,10 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
     // It should be the _baseTokenURI + the tokenId in string form
     // TIP #1: use strConcat() from the imported oraclizeAPI lib to set the complete token URI
     // TIP #2: you can also use uint2str() to convert a uint to a string
-        // see https://github.com/oraclize/ethereum-api/blob/master/oraclizeAPI_0.5.sol for strConcat()
+    // see https://github.com/oraclize/ethereum-api/blob/master/oraclizeAPI_0.5.sol for strConcat()
     // require the token exists before setting
     function setTokenURI(uint256 tokenId) internal {
-        require(_exists(tokenId));
+        require(_exists(tokenId), "The token does not exist.");
         _tokenURIs[tokenId] = strConcat(_baseTokenURI, uint2str(tokenId));
     }
 }
@@ -536,7 +536,7 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
 //  TODO's: Create CustomERC721Token contract that inherits from the ERC721Metadata contract. You can name this contract as you please
 //  1) Pass in appropriate values for the inherited ERC721Metadata contract
 //      - make the base token uri: https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/
-contract RealEstateToken is ERC721Metadata("Realestoken", "RST", "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/") {
+contract ArtToken is ERC721Metadata("ArtistelleryToken", "✪ARS✪", "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/") {
     //  2) create a public mint() that does the following:
     //      -can only be executed by the contract owner
     //      -takes in a 'to' address, tokenId, and tokenURI as parameters
