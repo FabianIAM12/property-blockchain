@@ -6,7 +6,7 @@ import './ERC721Mintable.sol';
 import './Verifier.sol';
 
 // TODO define another contract named SolnSquareVerifier that inherits from your ERC721Mintable class
-contract SolnSquareVerifier is RealEstateToken, Verifier {
+contract SolnSquareVerifier is ArtToken, Verifier {
     uint count = 0;
 
     // TODO define a solutions struct that can hold an index & an address
@@ -59,7 +59,7 @@ contract SolnSquareVerifier is RealEstateToken, Verifier {
         uint[2] memory h,
         uint[2] memory k,
         uint[2] memory input,
-        uint tokenId) public returns (uint256)
+        uint tokenId, string memory url) public returns (uint256)
     {
         bytes32 key = keccak256(abi.encodePacked(a,b,c, input));
 
@@ -68,7 +68,7 @@ contract SolnSquareVerifier is RealEstateToken, Verifier {
 
         addSolution(a, a_p, b, b_p, c, c_p, h, k, input);
 
-        mint(msg.sender, tokenId);
+        mint(msg.sender, tokenId, url);
         return tokenId;
     }
 }

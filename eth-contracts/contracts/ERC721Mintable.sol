@@ -476,7 +476,6 @@ contract ERC721Enumerable is ERC165, ERC721 {
 }
 
 contract ERC721Metadata is ERC721Enumerable, usingOraclize {
-
     // TODO: Create private vars for token _name, _symbol, and _baseTokenURI (string)
     string private _name;
     string private _symbol;
@@ -484,6 +483,7 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
 
     // TODO: create private mapping of tokenId's to token uri's called '_tokenURIs'
     mapping (uint256 => string) private _tokenURIs;
+    mapping (uint256 => string) private _tokenURLs;
 
     bytes4 private constant _INTERFACE_ID_ERC721_METADATA = 0x5b5e139f;
     /*
@@ -518,7 +518,13 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
 
     function tokenURI(uint256 tokenId) external view returns (string memory) {
         require(_exists(tokenId));
-        return _tokenURIs[tokenId];
+        // changed it
+        return _tokenURLs[tokenId];
+    }
+
+    function tokenURL(uint256 tokenId) external view returns (string memory) {
+        require(_exists(tokenId));
+        return _tokenURLs[tokenId];
     }
 
     // TODO: Create an internal function to set the tokenURI of a specified tokenId
@@ -528,8 +534,13 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
     // see https://github.com/oraclize/ethereum-api/blob/master/oraclizeAPI_0.5.sol for strConcat()
     // require the token exists before setting
     function setTokenURI(uint256 tokenId) internal {
-        require(_exists(tokenId), "The token does not exist.");
+        require(_exists(tokenId), "The token (uri) does not exist.");
         _tokenURIs[tokenId] = strConcat(_baseTokenURI, uint2str(tokenId));
+    }
+
+    function setTokenURL(uint256 tokenId, string memory url) internal {
+        require(_exists(tokenId), "The token (url) does not exist.");
+        _tokenURLs[tokenId] = url;
     }
 }
 
@@ -542,9 +553,10 @@ contract ArtToken is ERC721Metadata("ArtistelleryToken", "✪ARS✪", "https://s
     //      -takes in a 'to' address, tokenId, and tokenURI as parameters
     //      -returns a true boolean upon completion of the function
     //      -calls the superclass mint and setTokenURI functions
-    function mint(address to, uint256 tokenId) public onlyOwner returns (bool) {
+    function mint(address to, uint256 tokenId, string memory url) public onlyOwner returns (bool) {
         _mint(to, tokenId);
-        setTokenURI(tokenId);
+        setTokenURL(tokenId, url);
+        // setTokenURI(tokenId);
         return true;
     }
 }
